@@ -11,23 +11,31 @@
             padding: 0;
         }
 
-        body {
+       body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #ffffff;
+            background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
             min-height: 100vh;
             padding: 20px;
         }
+    @keyframes gradientFlow {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+       }
 
         .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
+          animation: slideFadeIn 1.2s ease forwards;
+          opacity: 0;
+          transform: translateY(30px);
+       }
+@keyframes slideFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
         .form-header {
             background: rgb(41, 41, 180);
@@ -216,6 +224,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #8e44ad;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(142, 68, 173, 0.2);
+            transform: scale(1.01);
         }
 
         .btn-submit:hover {
