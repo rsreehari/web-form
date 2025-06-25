@@ -3,28 +3,706 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biography Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Job Application Form</title></title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: rgb(41, 41, 180);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .form-content {
+            padding: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .form-section h2 {
+            color: black;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        input:valid {
+            border-color: #27ae60;
+        }
+
+        input:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: #e74c3c;
+            background-color: #fdf2f2;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkbox-item:hover, .radio-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background:rgb(41, 41, 180);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .file-input-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .file-input-button input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .range-output {
+            display: inline-block;
+            margin-left: 15px;
+            font-weight: bold;
+            color: #667eea;
+            background: #f8f9fa;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-section {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .btn-submit {
+            background:rgb(41, 41, 180);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .validation-summary {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .validation-summary.show {
+            display: block;
+        }
+
+        .validation-summary h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .validation-summary ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .validation-summary li {
+            color: #e74c3c;
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .validation-summary li::before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .form-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <fieldset class="biography">
-   
-    <h1 class="name">NIDHIN GIREESH</h1>
-    <p class="bio">I am a student of Govt. Engineering College, Idukki</p>
-    <fieldset class="about-me">
-    <legend>About me</legend>
-    <p>I'm a passionate and curious tech enthusiast currently exploring the worlds of frontend development, Python programming, and Flutter.</p>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Job Application Form</h1>
+                </div>
+        
+        <div class="form-content">
+            <div class="validation-summary" id="validationSummary">
+                <h3>Please fix the following errors:</h3>
+                <ul id="errorList"></ul>
+            </div>
 
-<p>I enjoy turning ideas into visually appealing, responsive, and user-friendly applications. Whether it's crafting clean UI with HTML, CSS, and JavaScript, scripting with Python, or building cross-platform apps using Flutter, I'm always eager to learn and grow.</p>
+            <form id="practiceForm" novalidate>
+                <!-- Personal Information Section -->
+                <div class="form-section">
+                    <h2>Personal Information</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required 
+                                   pattern="[A-Za-z]{2,}" title="At least 2 letters, no numbers">
+                            <div class="error-message" id="firstNameError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required 
+                                   pattern="[A-Za-z]{2,}" title="At least 2 letters, no numbers">
+                            <div class="error-message" id="lastNameError"></div>
+                        </div>
+                    </div>
 
-<p>Currently focused on improving my skills through hands-on projects and hackathons, I'm driven by a desire to solve real-world problems through technology. I value teamwork, creativity, and continuous learning, and I'm excited about opportunities that challenge me to innovate and build meaningful digital solutions.</p>
-</fieldset>
-    <fieldset class="contact-info">
-        <legend>Contact Informaation</legend>
-        <p>Email: <a href="mailto:nidhingireesh111@gmail.com">Mail Me</a></p>
-        <p>Github:<a href="https://github.com/NidhinGireesh">My Github</a></p>
-        <p>LinkedIn:<a href="https://www.linkedin.com/in/nidhingireesh/">My LinkedIn</a></p>
-    </fieldset>
-    </fieldset>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required 
+                                   placeholder="user@example.com">
+                            <div class="error-message" id="emailError"></div>
+                            <div class="success-message" id="emailSuccess">✓ Valid email format</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" 
+                                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                                   placeholder="123-456-7890"
+                                   title="Format: 123-456-7890">
+                            <div class="error-message" id="phoneError"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="birthdate">Date of Birth</label>
+                            <input type="date" id="birthdate" name="birthdate" 
+                                   max="2024-12-31" min="1900-01-01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" min="13" max="120" 
+                                   placeholder="Enter your age">
+                            <div class="error-message" id="ageError"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact & Location Section -->
+                <div class="form-section">
+                    <h2>Contact & Location</h2>
+                    
+                    <div class="form-group">
+                        <label for="website">Personal Website</label>
+                        <input type="url" id="website" name="website" 
+                               placeholder="https://yourwebsite.com">
+                        <div class="error-message" id="websiteError"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <select id="country" name="country">
+                                <option value="">Select your country</option>
+                                <option value="us">United States</option>
+                                <option value="ca">Canada</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="au">Australia</option>
+                                <option value="de">Germany</option>
+                                <option value="fr">France</option>
+                                <option value="jp">Japan</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                <!-- Preferences Section -->
+                <div class="form-section">
+                    <h2>Preferences & Settings</h2>
+
+                    <div class="form-group">
+                        <label for="experience">Years of Experience: <span class="range-output" id="experienceOutput">5</span></label>
+                        <input type="range" id="experience" name="experience" 
+                               min="0" max="20" value="5" step="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Contact Method <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="contactEmail" name="contactMethod" value="email" required>
+                                <label for="contactEmail">Email</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="contactPhone" name="contactMethod" value="phone">
+                                <label for="contactPhone">Phone</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="contactSms" name="contactMethod" value="sms">
+                                <label for="contactSms">SMS</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="contactMethodError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Skills & Interests</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skillJS" name="skills" value="javascript">
+                                <label for="skillJS">JavaScript</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skillHTML" name="skills" value="html">
+                                <label for="skillHTML">HTML</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skillCSS" name="skills" value="css">
+                                <label for="skillCSS">CSS</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skillPython" name="skills" value="python">
+                                <label for="skillPython">Python</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skillReact" name="skills" value="react">
+                                <label for="skillReact">React</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information Section -->
+                <div class="form-section">
+                    <h2>Additional Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="resume">Upload Resume</label>
+                        <div class="file-input-wrapper">
+                            <div class="file-input-button">
+                                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+                                📄 Choose File (PDF, DOC, DOCX)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Available Start Date</label>
+                            <input type="date" id="startDate" name="startDate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="preferredTime">Preferred Interview Time</label>
+                            <input type="time" id="preferredTime" name="preferredTime">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Tell us about yourself</label>
+                        <textarea id="bio" name="bio" rows="5" 
+                                  placeholder="Share your background, interests, and what motivates you..."
+                                  maxlength="500"></textarea>
+                        <small>Maximum 500 characters</small>
+                    </div>
+
+                </div>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <button type="submit" class="btn-submit">Submit Form</button>
+                    <button type="reset" class="btn-reset">Reset Form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Form validation and interactivity
+        const form = document.getElementById('practiceForm');
+        const validationSummary = document.getElementById('validationSummary');
+        const errorList = document.getElementById('errorList');
+
+        // Range slider output update
+        const experienceSlider = document.getElementById('experience');
+        const experienceOutput = document.getElementById('experienceOutput');
+        
+        experienceSlider.addEventListener('input', function() {
+            experienceOutput.textContent = this.value;
+        });
+
+        // File input display
+        const fileInput = document.getElementById('resume');
+        const fileButton = fileInput.parentElement;
+        
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileButton.innerHTML = `📄 ${this.files[0].name}`;
+                fileButton.style.background = '#27ae60';
+            }
+        });
+
+        // Real-time validation
+        const inputs = form.querySelectorAll('input, select, textarea');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', validateField);
+            input.addEventListener('input', clearFieldError);
+        });
+
+        function validateField(e) {
+            const field = e.target;
+            const fieldName = field.name;
+            const errorElement = document.getElementById(fieldName + 'Error');
+            const successElement = document.getElementById(fieldName + 'Success');
+            
+            let isValid = true;
+            let errorMessage = '';
+
+            // Clear previous states
+            if (errorElement) errorElement.style.display = 'none';
+            if (successElement) successElement.style.display = 'none';
+
+            // Required field validation
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                errorMessage = 'This field is required';
+                isValid = false;
+            }
+            
+            // Specific field validations
+            else if (field.type === 'email' && field.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(field.value)) {
+                    errorMessage = 'Please enter a valid email address';
+                    isValid = false;
+                } else if (successElement) {
+                    successElement.style.display = 'block';
+                }
+            }
+            
+            else if (field.type === 'tel' && field.value) {
+                const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
+                if (!phoneRegex.test(field.value)) {
+                    errorMessage = 'Phone format should be 123-456-7890';
+                    isValid = false;
+                }
+            }
+            
+            else if (field.type === 'url' && field.value) {
+                try {
+                    new URL(field.value);
+                } catch {
+                    errorMessage = 'Please enter a valid URL (e.g., https://example.com)';
+                    isValid = false;
+                }
+            }
+            
+            else if (field.type === 'number' && field.value) {
+                const num = parseFloat(field.value);
+                const min = parseFloat(field.min);
+                const max = parseFloat(field.max);
+                
+                if (min && num < min) {
+                    errorMessage = `Value must be at least ${min}`;
+                    isValid = false;
+                } else if (max && num > max) {
+                    errorMessage = `Value must not exceed ${max}`;
+                    isValid = false;
+                }
+            }
+            
+            else if (field.name === 'password' && field.value) {
+                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                if (!passwordRegex.test(field.value)) {
+                    errorMessage = 'Password must contain at least 8 characters with uppercase, lowercase, number, and special character';
+                    isValid = false;
+                }
+            }
+            
+            else if (field.name === 'confirmPassword' && field.value) {
+                const password = document.getElementById('password').value;
+                if (field.value !== password) {
+                    errorMessage = 'Passwords do not match';
+                    isValid = false;
+                }
+            }
+
+            // Display error message
+            if (!isValid && errorElement) {
+                errorElement.textContent = errorMessage;
+                errorElement.style.display = 'block';
+            }
+
+            return isValid;
+        }
+
+        function clearFieldError(e) {
+            const field = e.target;
+            const errorElement = document.getElementById(field.name + 'Error');
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+        }
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isFormValid = true;
+            const errors = [];
+
+            // Validate all fields
+            inputs.forEach(input => {
+                if (!validateField({target: input})) {
+                    isFormValid = false;
+                    const label = form.querySelector(`label[for="${input.id}"]`);
+                    const fieldName = label ? label.textContent.replace('*', '').trim() : input.name;
+                    errors.push(fieldName);
+                }
+            });
+
+            // Check required radio buttons
+            const contactMethodChecked = form.querySelector('input[name="contactMethod"]:checked');
+            if (!contactMethodChecked) {
+                isFormValid = false;
+                errors.push('Preferred Contact Method');
+                document.getElementById('contactMethodError').textContent = 'Please select a contact method';
+                document.getElementById('contactMethodError').style.display = 'block';
+            }
+
+            // Display validation summary
+            if (!isFormValid) {
+                errorList.innerHTML = '';
+                errors.forEach(error => {
+                    const li = document.createElement('li');
+                    li.textContent = error;
+                    errorList.appendChild(li);
+                });
+                validationSummary.classList.add('show');
+                validationSummary.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                validationSummary.classList.remove('show');
+                
+                // Simulate form submission
+                const submitBtn = form.querySelector('.btn-submit');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Form submitted successfully! 🎉\n\nThis is a demo form - no data was actually sent.');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            }
+        });
+
+        // Form reset
+        form.addEventListener('reset', function() {
+            // Clear all error messages
+            const errorMessages = form.querySelectorAll('.error-message, .success-message');
+            errorMessages.forEach(msg => msg.style.display = 'none');
+            
+            // Reset validation summary
+            validationSummary.classList.remove('show');
+            
+            // Reset file input display
+            fileButton.innerHTML = '📄 Choose File (PDF, DOC, DOCX)';
+            fileButton.style.background = '';
+            
+            // Reset range output
+            experienceOutput.textContent = '5';
+        });
+
+        // Auto-calculate age from birthdate
+        document.getElementById('birthdate').addEventListener('change', function() {
+            if (this.value) {
+                const birthDate = new Date(this.value);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                
+                document.getElementById('age').value = age;
+            }
+        });
+    </script>
 </body>
 </html>
